@@ -21,6 +21,9 @@ pool.query(`
   );
 `).catch(console.error);
 
+// Add after pool.query for CREATE TABLE
+pool.query('SELECT COUNT(*) FROM user_states;').then(({ rows }) => console.log('Table ready:', rows[0].count));
+
 app.use((req, res, next) => {
   let userId = req.headers.cookie?.split(';').find(c => c.trim().startsWith('userId='))?.split('=')[1];
   if (!userId && req.query.userId) userId = req.query.userId;
@@ -63,3 +66,5 @@ app.get('/health', (req, res) => res.send('OK'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Backend on ${PORT}`));
+
+
