@@ -6,7 +6,10 @@ const { Pool } = require('pg');
 
 const app = express();
 app.use(helmet());
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+  origin: 'https://three0minutes-30days.onrender.com',
+  credentials: true
+}));
 app.use(express.json());
 
 const pool = new Pool({
